@@ -1,6 +1,5 @@
 from queue import PriorityQueue
 
-# 1. Graph structure
 graph = {
     "Shapla Garden Appartment": [("Boshiruddin Road", 0.35), ("Lal Fokir mazar Road", 0.14)],
     "Boshiruddin Road": [("Shapla Garden Appartment", 0.35), ("Comfort Hospital Mor", 0.21), ("Kolabagan Bus Stand", 0.5)],
@@ -17,7 +16,6 @@ graph = {
     "UAP": [("Panthapath Signal", 0.5), ("Farmgate Bus Stand", 0.55), ("Nazneen School, Razabazar", 0.6)]
 }
 
-# 2. Heuristic values
 heuristics = {
     "Shapla Garden Appartment": 1,
     "Boshiruddin Road": 1,
@@ -34,10 +32,9 @@ heuristics = {
     "UAP": 0
 }
 
-# 3. A* Algorithm with optimal cost return
 def a_star(graph, heuristics, start, goal):
     open_set = PriorityQueue()
-    open_set.put((heuristics[start], 0, start))  # (f = g + h, g, node)
+    open_set.put((heuristics[start], 0, start))  
     came_from = {}
     cost_so_far = {start: 0}
 
@@ -45,7 +42,6 @@ def a_star(graph, heuristics, start, goal):
         _, g, current = open_set.get()
 
         if current == goal:
-            # Reconstruct path
             path = []
             while current in came_from:
                 path.append(current)
@@ -65,14 +61,11 @@ def a_star(graph, heuristics, start, goal):
 
     return None, float('inf')
 
-# 4. Define start and goal
 start = "Shapla Garden Appartment"
 goal = "UAP"
 
-# 5. Run A* search
 path, total_cost = a_star(graph, heuristics, start, goal)
 
-# 6. Output results
 if path:
     print("Shortest path from Shapla Garden Appartment to UAP:")
     print(" -> ".join(path))
